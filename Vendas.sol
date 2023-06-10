@@ -1,22 +1,24 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.20;
 
-contract Vendedor {
+//Fazer um contrato com 2 variaveis publicas: nomeVendedor, fator do bonus (numero Inteiro)
+contract CalculoBonus {
 
-    string public nomeVendedor;
-    uint32 public valorDeBonus;
-    uint32 public valorVenda;
+    string public vendedor;
+    uint256 public fatorBonus;
 
-    uint32 constant fatorBonus = 500;
+    constructor(string memory nomeVendedor, uint256 valorFatorBonus) {
+        vendedor = nomeVendedor;
+        fatorBonus = valorFatorBonus;
+    }
 
-    function valorDeBonificacao() public returns(uint256) {
-
-        valorDeBonus = valorVenda*fatorBonus;
-
-        return valorDeBonus;
-    } 
+    //função que ao passar o valor da venda, multiplico o fator de bônus e retorna o valor.
+    function calculaBonus(uint256 valorVenda) public view returns (uint256 bonusCalculado) {
+        bonusCalculado = valorVenda * fatorBonus;
+        bonusCalculado = bonusCalculado / 100;
+        return bonusCalculado;
+    }
 
 }
 
-
-//0x6d5D2A6BD5d7939DD9075734C07Fa9ec6a8968aE
+//0xfCD32E0C3cEe9d2Ee0d00f66E639402E39c0a3d0
